@@ -45,9 +45,12 @@ h1 {
   display: block;
   width: 230px;
   z-index: 10;
-  padding-top: 20px;
   padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: rgb(228, 228, 228);
+  max-height: calc(100vh - 40px);
+  overflow: scroll;
 }
 
 .hidecontrols{
@@ -55,7 +58,8 @@ h1 {
 }
 
 button{
-  border: 2px solid #f0f0f0;
+  border: 1px solid #000000;
+  padding: 5px;
   font-family: "Suisse";
   font-size: 10px;
   text-transform: uppercase;
@@ -201,9 +205,23 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ffffff;
 }
 
+input[type=checkbox]{
+  border-radius: 0;
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+  margin-left: 20px;
+  -webkit-appearance: none;
+}
+
+input[type=checkbox]:checked {
+	background-color: #000000;
+}
+
 input {
   display: block;
   margin-bottom: 20px !important;
+  clear: both;
 }
 
 
