@@ -1,98 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div class="window">
-      <div class="hidecontrols">
-        <button id="hidecontrols">
-          Toggle Controls
-        </button>
-      </div>
-      <div class="inputs" id="inputs">
-        <label for="numPlanes">Number of Planes</label>
-        <output>20</output>
-        <input id="numPlanes" type="range" min="0" max="100" step="1" value="20" oninput="this.previousElementSibling.value = this.value">
 
-        <label for="numPlanes">Material Opacity</label>
-        <output>0.6</output>
-        <input id="opacity" type="range" min="0" max="1" step="0.1" value="0.6" oninput="this.previousElementSibling.value = this.value">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
 
-        <label for="rotation">Plane Rotation</label>
-        <output>1.6</output>
-        <input id="rotation" type="range" min="0" max="3.2" step="0.01" value="1.6" oninput="this.previousElementSibling.value = this.value">
+<body>
+  <div class="window">
+    <div class="hidecontrols">
+      <button id="hidecontrols">
+        Toggle Controls
+      </button>
+      <button id="runanimation">
+        Run Animation
+      </button>
+    </div>
+    <div class="inputs" id="inputs">
 
-        <label for="maxSize">Max Plane Size</label>
-        <output>1</output>
-        <input id="maxSize" type="range" min="0" max="10" step="0.1" value="1" oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v0_x">v0_x</label>
-        <output>-2</output>
-        <input id="v0_x" type="range" min="-10" max="10" step="1" value="-2" oninput="this.previousElementSibling.value = this.value">
+      <label for="numPlanes">Number of Planes</label>
+      <output>20</output>
+      <input id="numPlanes" type="range" min="0" max="100" step="1" value="20"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v0_y">v0_y</label>
-        <output>-2</output>
-        <input id="v0_y" type="range" min="-10" max="10" step="1" value="-2" oninput="this.previousElementSibling.value = this.value">
+      <label for="numPlanes">Material Opacity</label>
+      <output>0.6</output>
+      <input id="opacity" type="range" min="0" max="1" step="0.1" value="0.6"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v0_z">v0_z</label>
-        <output>-2</output>
-        <input id="v0_z" type="range" min="-10" max="10" step="1" value="-2" oninput="this.previousElementSibling.value = this.value">
+      <label for="rotation">Plane Rotation</label>
+      <output>1.6</output>
+      <input id="rotation" type="range" min="0" max="3.2" step="0.01" value="1.6"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v1_x">v1_x</label>
-        <output>-4</output>
-        <input id="v1_x" type="range" min="-10" max="10" step="1" value="-4" oninput="this.previousElementSibling.value = this.value">
+      <label for="maxSize">Max Plane Size</label>
+      <output>1</output>
+      <input id="maxSize" type="range" min="0" max="10" step="0.1" value="1"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v1_y">v1_y</label>
-        <output>-1</output>
-        <input id="v1_y" type="range" min="-10" max="10" step="1" value="-1" oninput="this.previousElementSibling.value = this.value">
+      <label for="v0_x">v0_x</label>
+      <output>-2</output>
+      <input id="v0_x" type="range" min="-10" max="10" step="1" value="-2"
+        oninput="this.previousElementSibling.value = this.value">
 
-  
+      <label for="v0_y">v0_y</label>
+      <output>-2</output>
+      <input id="v0_y" type="range" min="-10" max="10" step="1" value="-2"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v1_z">v1_z</label>
-        <output>0</output>
-        <input id="v1_z" type="range" min="-10" max="10" step="1" value="0" oninput="this.previousElementSibling.value = this.value">
+      <label for="v0_z">v0_z</label>
+      <output>-2</output>
+      <input id="v0_z" type="range" min="-10" max="10" step="1" value="-2"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v2_x">v2_x</label>
-        <output>2</output>
-        <input id="v2_x" type="range" min="-10" max="10" step="1" value="2" oninput="this.previousElementSibling.value = this.value">
+      <label for="v1_x">v1_x</label>
+      <output>-4</output>
+      <input id="v1_x" type="range" min="-10" max="10" step="1" value="-4"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v2_y">v2_y</label>
-        <output>1</output>
-        <input id="v2_y" type="range" min="-10" max="10" step="1" value="1" oninput="this.previousElementSibling.value = this.value">
+      <label for="v1_y">v1_y</label>
+      <output>-1</output>
+      <input id="v1_y" type="range" min="-10" max="10" step="1" value="-1"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v2_z">v2_z</label>
-        <output>0</output>
-        <input id="v2_z" type="range" min="-10" max="10" step="1" value="0" oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v3_x">v3_x</label>
-        <output>0</output>
-        <input id="v3_x" type="range" min="-10" max="10" step="1" value="0" oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v3_y">v3_y</label>
-        <output>1</output>
-        <input id="v3_y" type="range" min="-10" max="10" step="1" value="1" oninput="this.previousElementSibling.value = this.value">
+      <label for="v1_z">v1_z</label>
+      <output>0</output>
+      <input id="v1_z" type="range" min="-10" max="10" step="1" value="0"
+        oninput="this.previousElementSibling.value = this.value">
 
-        <label for="v3_z">v3_z</label>
-        <output>1</output>
-        <input id="v3_z" type="range" min="-10" max="10" step="1" value="1" oninput="this.previousElementSibling.value = this.value">
-        
-        <!-- <label for="gradient">Enable Gradient</label>
+      <label for="v2_x">v2_x</label>
+      <output>2</output>
+      <input id="v2_x" type="range" min="-10" max="10" step="1" value="2"
+        oninput="this.previousElementSibling.value = this.value">
+
+      <label for="v2_y">v2_y</label>
+      <output>1</output>
+      <input id="v2_y" type="range" min="-10" max="10" step="1" value="1"
+        oninput="this.previousElementSibling.value = this.value">
+
+      <label for="v2_z">v2_z</label>
+      <output>0</output>
+      <input id="v2_z" type="range" min="-10" max="10" step="1" value="0"
+        oninput="this.previousElementSibling.value = this.value">
+
+      <label for="v3_x">v3_x</label>
+      <output>0</output>
+      <input id="v3_x" type="range" min="-10" max="10" step="1" value="0"
+        oninput="this.previousElementSibling.value = this.value">
+
+      <label for="v3_y">v3_y</label>
+      <output>1</output>
+      <input id="v3_y" type="range" min="-10" max="10" step="1" value="1"
+        oninput="this.previousElementSibling.value = this.value">
+
+      <label for="v3_z">v3_z</label>
+      <output>1</output>
+      <input id="v3_z" type="range" min="-10" max="10" step="1" value="1"
+        oninput="this.previousElementSibling.value = this.value">
+
+      <!-- <label for="gradient">Enable Gradient</label>
         <input id="gradient" type="checkbox" value="false"> -->
 
-        <label for="color">Plane Color</label>
-        <input id="color" type="color" value="#ffffff">
 
-       
+      <label for="color">Plane Color</label>
+      <input id="color" type="color" value="#ffffff">
 
-      </div>
+
+
     </div>
-    <div class="three" id="three">
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
-    <script type="module" src="/main.js"></script>
-  </body>
+  </div>
+  <div class="three" id="three">
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

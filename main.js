@@ -1,6 +1,8 @@
 import "./style.css";
+import gsap from "gsap";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
 const v0_x = -2;
 const v0_y = -2;
 const v0_z = -2;
@@ -24,6 +26,7 @@ let max_size = 1;
 let rotationValue = Math.PI / 2;
 let scene, camera, renderer, controls, curve;
 let planes = [];
+let positions = [];
 let gradient = false;
 let basecolor = 0xffffff;
 
@@ -61,17 +64,18 @@ function redrawPlanes() {
   material.opacity = opacityValue;
   const points = curve.getPoints(num_shapes);
   planes = [];
+  positions = [];
   for (let i = 0; i < num_shapes; i++) {
     const size = (max_size - min_size) / num_shapes;
     const geometry = new THREE.PlaneGeometry(i * size, i * size);
     const plane = new THREE.Mesh(geometry, material);
     scene.add(plane);
-    planes.push(plane);
     plane.rotation.x = rotationValue;
     plane.position.x = points[i].x + (i * size) / 2;
     plane.position.y = points[i].y;
     plane.position.z = points[i].z + (i * size) / 2;
     planes.push(plane);
+    positions.push(plane.position);
     if (gradient) {
       const gradMaterial = new THREE.MeshBasicMaterial({
         color: 0x133333 + i,
@@ -100,6 +104,29 @@ function render() {
   controls.update();
 }
 render();
+
+//ANIMATE
+function animatePlanes() {
+  const size = (max_size - min_size) / num_shapes;
+  const points = curve.getPoints(num_shapes);
+
+  for (let i = 0; i < planes.length; i++) {
+    gsap.fromTo(
+      planes[i].position,
+      {
+        x: curve.v0.x,
+        y: curve.v0.x,
+        z: curve.v0.x,
+      },
+      {
+        x: points[i].x + (i * size) / 2,
+        y: points[i].y,
+        z: points[i].z + (i * size) / 2,
+        duration: 1,
+      }
+    );
+  }
+}
 
 //RESIZE
 window.addEventListener("resize", function () {
@@ -220,6 +247,11 @@ function setUpControls() {
   //   basecolor = color.value;
   //   redrawScene();
   // });
+
+  const runanimation = document.getElementById("runanimation");
+  runanimation.onclick = function () {
+    animatePlanes();
+  };
 
   let controlVisibility = true;
   const inputs = document.getElementById("inputs");
