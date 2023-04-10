@@ -29,6 +29,7 @@ let planes = [];
 let positions = [];
 let gradient = false;
 let basecolor = 0xffffff;
+let duration = 1;
 
 //INIT SCENE
 scene = new THREE.Scene();
@@ -109,8 +110,9 @@ render();
 function animatePlanes() {
   const size = (max_size - min_size) / num_shapes;
   const points = curve.getPoints(num_shapes);
-
   for (let i = 0; i < planes.length; i++) {
+    const size = (max_size - min_size) / num_shapes;
+
     gsap.fromTo(
       planes[i].position,
       {
@@ -122,7 +124,21 @@ function animatePlanes() {
         x: points[i].x + (i * size) / 2,
         y: points[i].y,
         z: points[i].z + (i * size) / 2,
-        duration: 1,
+        duration: duration,
+      }
+    );
+    gsap.fromTo(
+      planes[i].scale,
+      {
+        x: 0.1,
+        y: 0.1,
+        z: 0.1,
+      },
+      {
+        x: 1,
+        y: 1,
+        z: 1,
+        duration: duration,
       }
     );
   }
@@ -139,6 +155,12 @@ window.addEventListener("resize", function () {
 
 //GUI STUFF SO U CAN EDIT
 function setUpControls() {
+  const durationControl = document.getElementById("duration");
+  console.log(durationControl);
+  durationControl.addEventListener("input", function () {
+    duration = durationControl.value;
+  });
+
   const numPlanes = document.getElementById("numPlanes");
   numPlanes.addEventListener("input", function () {
     num_shapes = numPlanes.value;
@@ -238,6 +260,12 @@ function setUpControls() {
   const color = document.getElementById("color");
   color.addEventListener("input", function () {
     material.color = new THREE.Color(color.value);
+    redrawScene();
+  });
+
+  const bgcolor = document.getElementById("bgcolor");
+  bgcolor.addEventListener("input", function () {
+    scene.background = new THREE.Color(bgcolor.value);
     redrawScene();
   });
 

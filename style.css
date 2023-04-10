@@ -53,9 +53,6 @@ h1 {
   overflow: scroll;
 }
 
-.hidecontrols{
-  padding-bottom: 20px;
-}
 
 button{
   border: 1px solid #000000;
@@ -76,7 +73,6 @@ output {
 }
 
 input[type="color"] {
-  float: left;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -224,5 +220,11 @@ input {
   clear: both;
 }
 
+.w-full{
+  width: 100%;
+}
 
+.inputs{
+  padding-top: 20px;
+}
 
