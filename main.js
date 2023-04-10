@@ -19,7 +19,7 @@ const v3_x = 0;
 const v3_y = 1;
 const v3_z = 1;
 
-let num_shapes = 20;
+let num_shapes = 45;
 let opacityValue = 0.6;
 let min_size = 0.1;
 let max_size = 1;
@@ -27,7 +27,7 @@ let rotationValue = Math.PI / 2;
 let scene, camera, renderer, controls, curve;
 let planes = [];
 let positions = [];
-let gradient = false;
+let gradient = true;
 let basecolor = 0xffffff;
 let duration = 1;
 
@@ -77,14 +77,21 @@ function redrawPlanes() {
     plane.position.z = points[i].z + (i * size) / 2;
     planes.push(plane);
     positions.push(plane.position);
+    console.log(gradient);
     if (gradient) {
       const gradMaterial = new THREE.MeshBasicMaterial({
-        color: 0x133333 + i,
+        color: 0xff3103 + i * i,
         side: THREE.DoubleSide,
       });
       gradMaterial.opacity = opacityValue;
       gradMaterial.transparent = true;
       plane.material = gradMaterial;
+    } else {
+      if (!(plane.material == material)) {
+        console.log("change");
+        plane.material.dispose();
+        plane.material = material;
+      }
     }
   }
 }
@@ -269,12 +276,11 @@ function setUpControls() {
     redrawScene();
   });
 
-  // const gradientControl = document.getElementById("gradient");
-  // gradientControl.addEventListener("input", function () {
-  //   gradient = gradientControl.value;
-  //   basecolor = color.value;
-  //   redrawScene();
-  // });
+  const gradientControl = document.getElementById("gradient");
+  gradientControl.addEventListener("input", function () {
+    gradient = gradientControl.checked;
+    redrawScene();
+  });
 
   const runanimation = document.getElementById("runanimation");
   runanimation.onclick = function () {
