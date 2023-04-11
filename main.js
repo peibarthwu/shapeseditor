@@ -118,36 +118,69 @@ function animatePlanes() {
   const size = (max_size - min_size) / num_shapes;
   const points = curve.getPoints(num_shapes);
   for (let i = 0; i < planes.length; i++) {
+    planes[i].visible = false;
+  }
+  for (let i = 0; i < planes.length; i++) {
     const size = (max_size - min_size) / num_shapes;
+    setTimeout(() => {
+      gsap.fromTo(
+        planes[i],
+        {
+          visible: false,
+        },
+        {
+          visible: true,
 
-    gsap.fromTo(
-      planes[i].position,
-      {
-        x: curve.v0.x,
-        y: curve.v0.x,
-        z: curve.v0.x,
-      },
-      {
-        x: points[i].x + (i * size) / 2,
-        y: points[i].y,
-        z: points[i].z + (i * size) / 2,
-        duration: duration,
+          duration: duration,
+        }
+      );
+      if (i > 0) {
+        gsap.fromTo(
+          planes[i].position,
+          {
+            x: points[i - 1].x + ((i - 1) * size) / 2,
+            y: points[i - 1].y,
+            z: points[i - 1].z + ((i - 1) * size) / 2,
+          },
+          {
+            x: points[i].x + (i * size) / 2,
+            y: points[i].y,
+            z: points[i].z + (i * size) / 2,
+            duration: duration,
+          }
+        );
       }
-    );
-    gsap.fromTo(
-      planes[i].scale,
-      {
-        x: 0.1,
-        y: 0.1,
-        z: 0.1,
-      },
-      {
-        x: 1,
-        y: 1,
-        z: 1,
-        duration: duration,
-      }
-    );
+    }, 100 * duration * i);
+
+    // gsap.fromTo(
+    //   planes[i].position,
+    //   {
+    //     x: curve.v0.x,
+    //     y: curve.v0.x,
+    //     z: curve.v0.x,
+    //   },
+    //   {
+    //     x: points[i].x + (i * size) / 2,
+    //     y: points[i].y,
+    //     z: points[i].z + (i * size) / 2,
+    //     duration: duration,
+    //   }
+    // );
+    // gsap.fromTo(
+    //   planes[i].scale,
+    //   {
+    //     x: 0.1,
+    //     y: 0.1,
+    //     z: 0.1,
+    //   },
+    //   {
+    //     x: 1,
+    //     y: 1,
+    //     z: 1,
+    //     duration: i * 0.1,
+    //   }
+    // );
+    console.log(i * 0.1);
   }
 }
 
