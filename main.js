@@ -134,6 +134,20 @@ function animatePlanes() {
           duration: duration,
         }
       );
+      gsap.fromTo(
+        planes[i].scale,
+        {
+          x: 0.1,
+          y: 0.1,
+          z: 0.1,
+        },
+        {
+          x: 1,
+          y: 1,
+          z: 1,
+          duration: duration,
+        }
+      );
       if (i > 0) {
         gsap.fromTo(
           planes[i].position,
@@ -166,20 +180,7 @@ function animatePlanes() {
     //     duration: duration,
     //   }
     // );
-    // gsap.fromTo(
-    //   planes[i].scale,
-    //   {
-    //     x: 0.1,
-    //     y: 0.1,
-    //     z: 0.1,
-    //   },
-    //   {
-    //     x: 1,
-    //     y: 1,
-    //     z: 1,
-    //     duration: i * 0.1,
-    //   }
-    // );
+
     console.log(i * 0.1);
   }
 }
